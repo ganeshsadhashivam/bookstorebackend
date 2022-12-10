@@ -1,37 +1,40 @@
-GET http://localhost:5000/api/v1/books/
+GET http://localhost:5000/api/v1/books
 Accept: application/json
 
-###
-GET http://localhost:5000/api/v1/products
-
 
 
 ###
-GET http://localhost:5000/api/v1/products/{id}
+GET http://localhost:5000/api/v1/books/{id}
 
 ###
-POST http://localhost:5000/api/v1/products/add
+PUT http://localhost:5000/api/v1/books/add
 Content-Type: application/json
 
 {
 
-    "name":"",
-    "description":"",
-    "productImage":"",
-    "date":""
+     "name":"",
+     "author":"",
+     "genre":"",
+     "dateOfRelease":"",
+     "bookImage":"",
+     "rating":"",
+     "price":"",
 }
 
 ###
-POST http://localhost:5000/api/v1/products/update/{id}
+PUT http://localhost:5000/api/v1/books/update/{id}
 Content-Type: application/json
 
 {
 
-    "name":"",
-    "description":"",
-    "productImage":"",
-    "date":""
+     "name":"",
+     "author":"",
+     "genre":"",
+     "dateOfRelease":"",
+     "bookImage":"",
+     "rating":"",
+     "price":"",
 }
 
 ###
-DELETE http://localhost:5000/api/v1/products/{id}
+DELETE http://localhost:5000/api/v1/books/{id}
