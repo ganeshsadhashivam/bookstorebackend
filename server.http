@@ -1,0 +1,37 @@
+GET http://localhost:5000/api/v1/books/
+Accept: application/json
+
+###
+GET http://localhost:5000/api/v1/products
+
+
+
+###
+GET http://localhost:5000/api/v1/products/{id}
+
+###
+POST http://localhost:5000/api/v1/products/add
+Content-Type: application/json
+
+{
+
+    "name":"",
+    "description":"",
+    "productImage":"",
+    "date":""
+}
+
+###
+POST http://localhost:5000/api/v1/products/update/{id}
+Content-Type: application/json
+
+{
+
+    "name":"",
+    "description":"",
+    "productImage":"",
+    "date":""
+}
+
+###
+DELETE http://localhost:5000/api/v1/products/{id}
