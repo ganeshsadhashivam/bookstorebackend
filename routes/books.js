@@ -8,8 +8,8 @@ const mongoose = require("mongoose");
 //GET Request
 BooksRouter.route("/").get((req, res) => {
   Books.find()
-    .then((books) => res.json(books))
-    .catch((err) => res.status(400).json("Error: " + err));
+    .then((books) => res.status(200).json(books))
+    .catch((err) => res.status(404).json("Error: " + err));
 });
 
 //PUT request for add
