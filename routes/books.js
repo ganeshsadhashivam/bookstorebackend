@@ -14,7 +14,7 @@ BooksRouter.route("/").get((req, res) => {
 
 //PUT request for add
 
-BooksRouter.route("/add").put((req, res) => {
+BooksRouter.route("/add").post((req, res) => {
   const { name, author, genre, dateOfRelease, bookImage, rating, price } =
     req.body;
   if (
