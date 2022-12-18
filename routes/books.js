@@ -128,9 +128,16 @@ BooksRouter.put("/:id", async (req, res, next) => {
     const updates = req.body;
     console.log(updates);
     const options = { new: true };
-    const result = await Books.findByIdAndUpdate(id, updates, options);
-
-    res.status(200).send(result);
+    const data = await Books.findByIdAndUpdate(
+      id,
+      updates,
+      options,
+      function (err, result) {
+        console.log(result);
+        if (err) return res.status(404).json({ message: " ProductId invalid" });
+        res.status(200).send(result);
+      }
+    );
   } catch (error) {
     if (error instanceof mongoose.CastError) {
       res.status(404).json({ message: "Invalid ProductId" });
