@@ -52,7 +52,7 @@ BooksRouter.route("/add").post((req, res) => {
 
   newBooks
     .save()
-    .then(() => res.status(201).json("Books added!"))
+    .then(() => res.status(201).json(newBooks))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
