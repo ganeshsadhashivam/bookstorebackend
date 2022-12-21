@@ -1,4 +1,6 @@
 const Router = require("express");
+const param = require("express-validator");
+const body = require("express-validator");
 const Books = require("../models/books.modal");
 
 const BooksRouter = Router();
@@ -140,21 +142,21 @@ BooksRouter.delete("/:id", async (req, res, next) => {
 //   }
 // });
 
-BooksRouter.put("/:id", async (req, res, next) => {
-  try {
-    const id = req.params.id;
-    const updates = req.body;
-    console.log(updates);
-    const options = { new: true };
-    const result = await Books.findByIdAndUpdate(id, updates, options);
-    console.log(typeof result);
-    res.status(200).send(result);
-  } catch (error) {
-    if (error instanceof mongoose.CastError) {
-      res.status(404).json({ message: "Invalid ProductId" });
-    }
-  }
-});
+// BooksRouter.put("/:id", async (req, res, next) => {
+//   try {
+//     const id = req.params.id;
+//     const updates = req.body;
+//     console.log(updates);
+//     const options = { new: true };
+//     const result = await Books.findByIdAndUpdate(id, updates, options);
+//     console.log(typeof result);
+//     res.status(200).send(result);
+//   } catch (error) {
+//     if (error instanceof mongoose.CastError) {
+//       res.status(404).json({ message: "Invalid ProductId" });
+//     }
+//   }
+// });
 
 // BooksRouter.put("/:id", (req, res, next) => {
 //   const id = req.params.id;
@@ -174,5 +176,77 @@ BooksRouter.put("/:id", async (req, res, next) => {
 //         }
 //     }
 //   )
+
+// BooksRouter.put("/:id", async (req, res, next) => {
+//   try {
+//     const id = req.params.id;
+//     console.log(id);
+//     const updates = req.body;
+//     const options = { new: true };
+//     var result = await Books.findByIdAndUpdate(id, updates, options);
+//   //  // {
+//     //   if (err) {
+//     //     res.status(404).json({ Message: "Inavlid ProductId" });
+//     //   } else {
+//     //     res.status(200).send(docs);
+//     //   }
+//    // // });
+//     res.status(200).send(result);
+//   } catch (error) {
+//     if (error instanceof mongoose.CastError) {
+//       res.status(404).json({ message: "Invalid ProductId" });
+//     }
+//   }
+//  });
+
+// BooksRouter.put("/:id", async (req, res, next) => {
+//   const bookid = req.params.id;
+//   const { name, author, genre, dateOfRelease, bookImage, rating, price } =
+//     req.body;
+
+//   const result = await Books.findByIdAndUpdate(
+//     bookid,
+//     {
+//       name: name,
+//       author: author,
+//       genre: genre,
+//       dateOfRelease: dateOfRelease,
+//       bookImage: bookImage,
+//       rating: rating,
+//       price: price,
+//     },
+//     function (error, docs) {
+//       if (error) {
+//         res.status(404).json({ message: "Invalid ProductId" });
+//       } else if (error instanceof mongoose.CastError) {
+//         res.status(404).json({ message: "Invalid ProductId" });
+//       }
+//     }
+//   ).then(() => res.status(200).send(result));
+// });
+
+BooksRouter.put("/:id", async (request, response, next) => {
+  const book = await Books.findById(request.params.id);
+
+  if (!book) {
+    return response.status(404).json({ error: "book not found" });
+  }
+
+  // if (book.userId.toString() !== decodedToken.id.toString()) {
+  //   return response.status(401).json({ error: "not authorized" });
+  // }/
+
+  book.name = request.body.name;
+  book.author = request.body.author;
+  book.genre = request.body.genre;
+  book.dateOfRelease = new Date().getTime();
+  book.bookImage = request.body.bookImage;
+  book.rating = request.body.rating;
+  book.price = request.body.price;
+
+  const savedProduct = await book.save();
+  console.log(savedProduct);
+  response.json(savedProduct);
+});
 
 module.exports = BooksRouter;

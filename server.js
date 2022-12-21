@@ -17,8 +17,9 @@ const uri = process.env.ATLAS_URI;
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
-  // useUnifiedTopology: true,
+  //useUnifiedTopology: true,
   maxPoolSize: 100,
+
   // waitQueueTimeoutMS: 2500,
 });
 
